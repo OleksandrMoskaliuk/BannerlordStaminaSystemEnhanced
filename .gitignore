@@ -63,3 +63,8 @@ obj/
 *.exe
 *.pdb
 *.userprefs
+
+# But not these:
+!.gitignore
+!lib/
+!lib/**
