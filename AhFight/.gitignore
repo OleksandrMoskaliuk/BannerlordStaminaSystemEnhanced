@@ -66,5 +66,5 @@ obj/
 
 # But not these:
 !.gitignore
-!AhFight/lib/
-!AhFight/lib/**
+!lib/
+!lib/**

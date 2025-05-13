@@ -1,11 +1,35 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProjectGuid>{D9FB7B60-3582-4C28-BCC8-4EECE1AD28DB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>AhFight</RootNamespace>
+    <AssemblyName>AhFight</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>lib\0Harmony.dll</HintPath>
@@ -71,5 +95,31 @@
       <HintPath>lib\TaleWorlds.ScreenSystem.dll</HintPath>
     </Reference>
   </ItemGroup>
-
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AhFightAgent.cs" />
+    <Compile Include="AhFightAPI.cs" />
+    <Compile Include="AhFightBlow.cs" />
+    <Compile Include="AhFightConfig.cs" />
+    <Compile Include="AhFightData.cs" />
+    <Compile Include="AhFightMissionLogic.cs" />
+    <Compile Include="AhFightState.cs" />
+    <Compile Include="AhFightStateManager.cs" />
+    <Compile Include="AhFightView.cs" />
+    <Compile Include="AhFightViewControl.cs" />
+    <Compile Include="Combat\AhFightCacheManager.cs" />
+    <Compile Include="Combat\AhFightDamageCalculator.cs" />
+    <Compile Include="Combat\DamagePenaltyEffect.cs" />
+    <Compile Include="Combat\DamagePenaltyPatch.cs" />
+    <Compile Include="Combat\DecideCrushedThroughPatch.cs" />
+    <Compile Include="Combat\MovementPenaltyEffect.cs" />
+    <Compile Include="Combat\WeaponCalculator.cs" />
+    <Compile Include="DebugHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\McmSetting.cs" />
+    <Compile Include="SubModule.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
