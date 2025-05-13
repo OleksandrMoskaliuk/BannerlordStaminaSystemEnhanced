@@ -3,22 +3,21 @@ using System;
 using HarmonyLib;
 using SandBox.GameComponents;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 
 namespace AhFight.Combat
 {
-    // Token: 0x0200001C RID: 28
     [HarmonyPatch(typeof(SandboxAgentApplyDamageModel))]
     [HarmonyPatch("DecideCrushedThrough")]
     public static class DecideCrushedThroughPatch
     {
-        // Token: 0x060001CF RID: 463
         private static void Prefix(ref bool __result, Agent attackerAgent, Agent defenderAgent, float totalAttackEnergy, Agent.UsageDirection attackDirection, StrikeType strikeType, WeaponComponentData defendItem, bool isPassiveUsage)
         {
             float DefenderAh = AhFightAPI.GetCurrentAhFight(defenderAgent);
             float DefenderRemainAh = AhFightAPI.GetCurrentAhFight(defenderAgent) / AhFightAPI.GetMaxAhFight(defenderAgent);
-            float CrushBlockThreshold = 0.45f;
-            float ReduceStaminaDamageAmountFactor_m = 0.65f;
+            float CrushBlockThreshold = AhFightConfig.CrushThroughBlockThreshold;
+            float ReduceStaminaDamageAmountFactor_m = AhFightConfig.StaminaDamageAmountOnBlock;
             if (DefenderRemainAh < CrushBlockThreshold)
             {
                 __result = true;
@@ -56,10 +55,14 @@ namespace AhFight.Combat
                 float TwoHanded = MissionGameModels.Current.AgentStatCalculateModel.GetEffectiveSkill(attackerAgent, DefaultSkills.TwoHanded) * 0.01f;
                 float Polearm = MissionGameModels.Current.AgentStatCalculateModel.GetEffectiveSkill(attackerAgent, DefaultSkills.Polearm) * 0.01f;
                 float Riding = MissionGameModels.Current.AgentStatCalculateModel.GetEffectiveSkill(attackerAgent, DefaultSkills.Riding) * 0.01f;
-                float SkillsBonus = (HP + Lv + Athletics + OneHanded + TwoHanded + Polearm * Riding - AgeDebuff) * 1.2f;
-                float Damage = (StaminaDamageAmount * totalAttackEnergy) * 0.002f;
-                StaminaDamageAmount = ((Damage * SkillsBonus) * 0.65f) * ReduceStaminaDamageAmountFactor_m;
+                float SkillsBonus = (HP + Lv + Athletics + OneHanded + TwoHanded + Polearm * Riding - AgeDebuff) * 1.5f;
+                float Damage = (StaminaDamageAmount * totalAttackEnergy) * 0.005f;
+                StaminaDamageAmount = ((Damage * SkillsBonus) * 0.45f) * ReduceStaminaDamageAmountFactor_m;
                 AhFightAPI.ModifyAhFight(defenderAgent, DefenderAh - StaminaDamageAmount);
+                if (attackerAgent.IsPlayerControlled && false)
+                {
+                    InformationManager.DisplayMessage(new InformationMessage(string.Format("StaminaDamageAmount: {0:F2}", StaminaDamageAmount), Colors.Magenta));
+                }
                 return;
             }
 
