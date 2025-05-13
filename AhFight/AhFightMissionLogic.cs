@@ -30,7 +30,6 @@ namespace AhFight
 			}
 		}
 
-		// Token: 0x0600006D RID: 109
 		private void UpdateAhFight()
 		{
 			List<Agent> list = new List<Agent>();
@@ -38,17 +37,22 @@ namespace AhFight
 			{
 				Agent key = keyValuePair.Key;
 				AhFightData value = keyValuePair.Value;
+				
 				if (key == null || key.Mission == null || !key.IsActive())
 				{
 					list.Add(key);
 				}
 				else
 				{
-					if (AhFightConfig.movementPenaltyEnabled)
+                    if (AhFightConfig.movementPenaltyEnabled)
 					{
 						MovementPenaltyEffect.ApplyMovementPenalty(key);
 					}
-					if (value.ahfight < value.maxAhFight)
+                    if (AhFightConfig.AttackSpeedPenaltyEnabled)
+                    {
+						AttackSpeedPenalty.ApplyAttackSpeedPenalty(key, value);
+                    }
+                    if (value.ahfight < value.maxAhFight)
 					{
 						AhFightState currentState = AhFightStateManager.GetCurrentState(key);
 						float num = value.regenPerTick;
@@ -87,7 +91,6 @@ namespace AhFight
 			}
 		}
 
-		// Token: 0x0600006E RID: 110
 		private void ProcessWeaponDrops()
 		{
 			if (AhFightConfig.ShieldDropEnabled)

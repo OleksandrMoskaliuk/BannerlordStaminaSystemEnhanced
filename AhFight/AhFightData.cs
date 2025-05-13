@@ -13,7 +13,10 @@ namespace AhFight
 			this.regenPerTick = AhFightConfig.baseAhFightRegen;
 			this.lastAhFightLossTime = 0f;
 			this.maxAhFightLossCount = 0;
-		}
+            this.origSwingSpeedMultiplier = 0f;
+            this.origThrustSpeedMultiplier = 0f;
+            this.nextUpdateTime = 0f;
+        }
 
 		// Token: 0x0400002D RID: 45
 		public float ahfight;
@@ -29,5 +32,12 @@ namespace AhFight
 
 		// Token: 0x04000031 RID: 49
 		public int maxAhFightLossCount;
+
+		public float origSwingSpeedMultiplier;
+
+		public float origThrustSpeedMultiplier;
+
+        // Performance related
+        public float nextUpdateTime;
 	}
 }

@@ -111,6 +111,7 @@
     <Compile Include="AhFightViewControl.cs" />
     <Compile Include="Combat\AhFightCacheManager.cs" />
     <Compile Include="Combat\AhFightDamageCalculator.cs" />
+    <Compile Include="Combat\AttackSpeedPenalty.cs" />
     <Compile Include="Combat\DamagePenaltyEffect.cs" />
     <Compile Include="Combat\DamagePenaltyPatch.cs" />
     <Compile Include="Combat\DecideCrushedThroughPatch.cs" />

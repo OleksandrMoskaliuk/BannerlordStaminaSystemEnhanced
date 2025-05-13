@@ -10,7 +10,7 @@ namespace AhFight
 		// Token: 0x0400002A RID: 42
 		public static Dictionary<Agent, AhFightData> values = new Dictionary<Agent, AhFightData>();
 
-		// Token: 0x0400002B RID: 43
-		public static AhFightViewControl ahfightVisual = null;
+        // Token: 0x0400002B RID: 43
+        public static AhFightViewControl ahfightVisual = null;
 	}
 }

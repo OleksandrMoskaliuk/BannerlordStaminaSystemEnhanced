@@ -1471,8 +1471,69 @@ namespace AhFight
 			}
 		}
 
-		// Token: 0x06000065 RID: 101
-		public static void Initialize()
+        public static float CrushThroughBlockThreshold
+        {
+            get
+            {
+                McmSetting instance = GlobalSettings<McmSetting>.Instance;
+                if (instance == null)
+                {
+                    return 0.45f;
+                }
+                return instance.CrushThroughBlockThreshold;
+            }
+        }
+
+        public static float StaminaDamageAmountOnBlock
+        {
+            get
+            {
+                McmSetting instance = GlobalSettings<McmSetting>.Instance;
+                if (instance == null)
+                {
+                    return 0.45f;
+                }
+                return instance.StaminaDamageAmountOnBlock;
+            }
+        }
+
+        public static bool AttackSpeedPenaltyEnabled
+        {
+            get
+            {
+                McmSetting instance = GlobalSettings<McmSetting>.Instance;
+                return instance == null || instance.AttackSpeedPenaltyEnabled;
+            }
+        }
+
+        public static float MinAttackSpeedMultiplier
+        {
+            get
+            {
+                McmSetting instance = GlobalSettings<McmSetting>.Instance;
+                if (instance == null)
+                {
+                    return 0.2f;
+                }
+                return instance.MinAttackSpeedMultiplier;
+            }
+        }
+
+        public static float LowAhAttackSpeedThreshold
+        {
+            get
+            {
+                McmSetting instance = GlobalSettings<McmSetting>.Instance;
+                if (instance == null)
+                {
+                    return 0.8f;
+                }
+                return instance.LowStaminaAttackSpeedThreshold;
+            }
+        }
+
+        // Token: 0x06000065 RID: 101
+        public static void Initialize()
 		{
 		}
 

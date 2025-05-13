@@ -833,8 +833,35 @@ namespace AhFight.Settings
 		[SettingPropertyGroup("{=ah_ranged_settings}Ranged/{=ah_ranged_resistance}Strike Effect Adjustment", GroupOrder = 12)]
 		public float RangedHitLoss { get; set; } = 12f;
 
-		// Token: 0x060001AB RID: 427 RVA: 0x000065DC File Offset: 0x000047DC
-		public McmSetting()
+        /// <summary>
+        /// Crush Through Block
+        /// </summary>
+        [SettingPropertyFloatingInteger("Crush Through Block AH Threshold", 0.1f, 0.99f, "0.0 %", Order = 4, RequireRestart = false, HintText = "Crush Through Block if AH lower than threshold. Default: 45.0 percent")]
+        [SettingPropertyGroup("Crush Through Block", GroupOrder = 13)]
+        public float CrushThroughBlockThreshold { get; set; } = 0.45f;
+
+        [SettingPropertyFloatingInteger("Stamina Damage Amount on Block Multiplier", 0.1f, 0.99f, "0.0 %", Order = 4, RequireRestart = false, HintText = "Damage to AH when player or ai blocking attacks. Based on weapon damage, player combat skills, ahtletics, riding, HP, age and attack energy. Default: 0.45")]
+        [SettingPropertyGroup("Crush Through Block", GroupOrder = 13)]
+        public float StaminaDamageAmountOnBlock { get; set; } = 0.45f;
+
+        /// <summary>
+        /// Performance Penalties
+        /// Reduce player attack speed
+        /// </summary>
+
+        [SettingPropertyBool("Enable Performance Penalties", RequireRestart = false, HintText = "Enable or disable attack speed penalties based on AH")]
+        [SettingPropertyGroup("Performance Penalties", GroupOrder = 14)]
+        public bool AttackSpeedPenaltyEnabled { get; set; } = true;
+
+        [SettingPropertyFloatingInteger("Minimum Attack Speed Multiplier", 0.1f, 1f, "0.0", Order = 0, RequireRestart = false, HintText = "Minimum speed multiplier when stamina is depleted. Default: 0.2")]
+        [SettingPropertyGroup("Performance Penalties", GroupOrder = 14)]
+        public float MinAttackSpeedMultiplier { get; set; } = 0.2f;
+
+        [SettingPropertyFloatingInteger("Minimum Attack Speed Multiplier Stamina Threshold", 0.1f, 0.99f, "0.0", Order = 1, RequireRestart = false, HintText = "Stamina threshold for applying penalties. Default: 0.8")]
+        [SettingPropertyGroup("Performance Penalties", GroupOrder = 14)]
+        public float LowStaminaAttackSpeedThreshold { get; set; } = 0.8f;
+
+        public McmSetting()
 		{
 			this.AhfightEnabled = true;
 			this.AhfightGUIEnabled = true;
@@ -947,6 +974,11 @@ namespace AhFight.Settings
 			this.WeakStateHitDamageModifier = 0.8f;
 			this.TiredStateHitDamageModifier = 0.7f;
 			this.PowerlessStateHitDamageModifier = 0.5f;
-		}
+            this.StaminaDamageAmountOnBlock  = 0.45f;
+            this.CrushThroughBlockThreshold  = 0.45f;
+			this.AttackSpeedPenaltyEnabled = true;
+            this.MinAttackSpeedMultiplier = 0.2f;
+			this.LowStaminaAttackSpeedThreshold = 0.8f;
+        }
 	}
 }
