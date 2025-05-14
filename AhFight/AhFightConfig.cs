@@ -279,25 +279,25 @@ namespace AhFight
 			}
 		}
 
-		// Token: 0x17000015 RID: 21
-		// (get) Token: 0x06000015 RID: 21
-		public static float normalSpeedModifier
-		{
+		// Token: 0x17000017 RID: 23
+		// (get) Token: 0x06000017 RID: 23
+		public static float MinMovementPenaltyMultiplier
+        {
 			get
 			{
 				McmSetting instance = GlobalSettings<McmSetting>.Instance;
 				if (instance == null)
 				{
-					return 1f;
+					return 0.45f;
 				}
-				return instance.NormalSpeedModifier;
+				return instance.MinMovementPenaltyMultiplier;
 			}
 		}
 
-		// Token: 0x17000016 RID: 22
-		// (get) Token: 0x06000016 RID: 22
-		public static float weakSpeedModifier
-		{
+		// Token: 0x17000018 RID: 24
+		// (get) Token: 0x06000018 RID: 24
+		public static float MovementPenaltyAHThreshold
+        {
 			get
 			{
 				McmSetting instance = GlobalSettings<McmSetting>.Instance;
@@ -305,37 +305,7 @@ namespace AhFight
 				{
 					return 0.8f;
 				}
-				return instance.WeakSpeedModifier;
-			}
-		}
-
-		// Token: 0x17000017 RID: 23
-		// (get) Token: 0x06000017 RID: 23
-		public static float tiredSpeedModifier
-		{
-			get
-			{
-				McmSetting instance = GlobalSettings<McmSetting>.Instance;
-				if (instance == null)
-				{
-					return 0.5f;
-				}
-				return instance.TiredSpeedModifier;
-			}
-		}
-
-		// Token: 0x17000018 RID: 24
-		// (get) Token: 0x06000018 RID: 24
-		public static float powerlessSpeedModifier
-		{
-			get
-			{
-				McmSetting instance = GlobalSettings<McmSetting>.Instance;
-				if (instance == null)
-				{
-					return 0.3f;
-				}
-				return instance.PowerlessSpeedModifier;
+				return instance.MovementPenaltyAHThreshold;
 			}
 		}
 

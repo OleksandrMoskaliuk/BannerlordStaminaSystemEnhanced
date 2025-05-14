@@ -196,33 +196,19 @@ namespace AhFight.Settings
 		[SettingPropertyGroup("{=ah_skill_effects}Skill Effects", GroupOrder = 3)]
 		public float WeaponSkillRegenBase { get; set; } = 0.021f;
 
-		// Token: 0x17000092 RID: 146
-		// (get) Token: 0x060000F5 RID: 245 RVA: 0x00002F91 File Offset: 0x00001191
-		// (set) Token: 0x060000F6 RID: 246 RVA: 0x00002F99 File Offset: 0x00001199
-		[SettingPropertyFloatingInteger("{=ah_normal_state_speed}Normal State Speed", 0.5f, 2f, "0.0", RequireRestart = false, HintText = "{=ah_normal_state_speed_hint}Movement speed when AH is sufficient. 1.0 is normal speed", Order = 0)]
-		[SettingPropertyGroup("{=ah_movement_speed_penalty}Movement Speed Penalty", GroupOrder = 4)]
-		public float NormalSpeedModifier { get; set; } = 1f;
-
-		// Token: 0x17000093 RID: 147
-		// (get) Token: 0x060000F7 RID: 247 RVA: 0x00002FA2 File Offset: 0x000011A2
-		// (set) Token: 0x060000F8 RID: 248 RVA: 0x00002FAA File Offset: 0x000011AA
-		[SettingPropertyFloatingInteger("{=ah_weak_state_speed}Weak State Speed", 0.2f, 1.5f, "0.0", RequireRestart = false, HintText = "{=ah_weak_state_speed_hint}Movement speed when AH is weak. 0.8 means speed is halved", Order = 1)]
-		[SettingPropertyGroup("{=ah_movement_speed_penalty}Movement Speed Penalty", GroupOrder = 4)]
-		public float WeakSpeedModifier { get; set; } = 0.8f;
-
 		// Token: 0x17000094 RID: 148
 		// (get) Token: 0x060000F9 RID: 249 RVA: 0x00002FB3 File Offset: 0x000011B3
 		// (set) Token: 0x060000FA RID: 250 RVA: 0x00002FBB File Offset: 0x000011BB
-		[SettingPropertyFloatingInteger("{=ah_tired_state_speed}Tired State Speed", 0.1f, 1f, "0.0", RequireRestart = false, HintText = "{=ah_tired_state_speed_hint}Movement speed when AH is tired. 0.5 means speed is reduced to normal 50%", Order = 2)]
+		[SettingPropertyFloatingInteger("Minimum Movement Speed Multiplier", 0.1f, 1f, "0.0", RequireRestart = false, HintText = "Minimum movement speed when AH is low. Default: 0.45", Order = 2)]
 		[SettingPropertyGroup("{=ah_movement_speed_penalty}Movement Speed Penalty", GroupOrder = 4)]
-		public float TiredSpeedModifier { get; set; } = 0.5f;
+		public float MinMovementPenaltyMultiplier { get; set; } = 0.45f;
 
 		// Token: 0x17000095 RID: 149
 		// (get) Token: 0x060000FB RID: 251 RVA: 0x00002FC4 File Offset: 0x000011C4
 		// (set) Token: 0x060000FC RID: 252 RVA: 0x00002FCC File Offset: 0x000011CC
-		[SettingPropertyFloatingInteger("{=ah_powerless_state_speed}Powerless State Speed", 0.05f, 0.8f, "0.0", RequireRestart = false, HintText = "{=ah_powerless_state_speed_hint}Movement speed when AH is powerless. 0.3 means speed is reduced to normal 30%", Order = 3)]
+		[SettingPropertyFloatingInteger("AH Threshold For Applying Movement Penalty", 0.1f, 1.0f, "0.0", RequireRestart = false, HintText = "Threshold for movement speed penalty when AH is low. Default: 0.8", Order = 3)]
 		[SettingPropertyGroup("{=ah_movement_speed_penalty}Movement Speed Penalty", GroupOrder = 4)]
-		public float PowerlessSpeedModifier { get; set; } = 0.3f;
+		public float MovementPenaltyAHThreshold { get; set; } = 0.8f;
 
 		// Token: 0x17000098 RID: 152
 		// (get) Token: 0x06000101 RID: 257 RVA: 0x00002FF7 File Offset: 0x000011F7
@@ -870,10 +856,8 @@ namespace AhFight.Settings
 			this.WeaponSkillBase = 65f;
 			this.WeaponSkillModifier = 180f;
 			this.WeaponSkillRegenBase = 0.021f;
-			this.NormalSpeedModifier = 1f;
-			this.WeakSpeedModifier = 0.8f;
-			this.TiredSpeedModifier = 0.6f;
-			this.PowerlessSpeedModifier = 0.4f;
+			this.MinMovementPenaltyMultiplier = 0.45f;
+			this.MovementPenaltyAHThreshold = 0.8f;
 			this.BaseAhFightDamage = 20f;
 			this.AttackerAhFightMultiplier = 0.5f;
 			this.DefenderAhFightMultiplier = 1f;

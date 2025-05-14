@@ -39,7 +39,7 @@ namespace AhFight
 				AhFightData value = keyValuePair.Value;
 				
 				if (key == null || key.Mission == null || !key.IsActive())
-				{
+				{	
 					list.Add(key);
 				}
 				else
