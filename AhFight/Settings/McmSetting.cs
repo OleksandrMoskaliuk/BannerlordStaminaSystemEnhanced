@@ -224,33 +224,19 @@ namespace AhFight.Settings
 		[SettingPropertyGroup("{=ah_movement_speed_penalty}Movement Speed Penalty", GroupOrder = 4)]
 		public float PowerlessSpeedModifier { get; set; } = 0.3f;
 
-		// Token: 0x17000096 RID: 150
-		// (get) Token: 0x060000FD RID: 253 RVA: 0x00002FD5 File Offset: 0x000011D5
-		// (set) Token: 0x060000FE RID: 254 RVA: 0x00002FDD File Offset: 0x000011DD
-		[SettingPropertyFloatingInteger("{=ah_normal_state_hit_damage_modifier}Normal State Hit Damage Penalty", 0.1f, 2f, "0.0", RequireRestart = false, HintText = "{=ah_normal_state_hit_damage_modifier_hint}Normal state hit damage penalty, e.g.: 1.0 means no damage change, 0.8 means 20% reduction", Order = 0)]
-		[SettingPropertyGroup("{=ah_damage_penalty}Damage Penalty(Only melee)", GroupOrder = 5)]
-		public float NormalStateHitDamageModifier { get; set; } = 1f;
-
-		// Token: 0x17000097 RID: 151
-		// (get) Token: 0x060000FF RID: 255 RVA: 0x00002FE6 File Offset: 0x000011E6
-		// (set) Token: 0x06000100 RID: 256 RVA: 0x00002FEE File Offset: 0x000011EE
-		[SettingPropertyFloatingInteger("{=ah_weak_state_hit_damage_modifier}Weak State Hit Damage Penalty", 0.1f, 1.8f, "0.0", RequireRestart = false, HintText = "{=ah_weak_state_hit_damage_modifier_hint}Weak state hit damage penalty, default 0.8, means 20% reduction", Order = 1)]
-		[SettingPropertyGroup("{=ah_damage_penalty}Damage Penalty(Only melee)", GroupOrder = 5)]
-		public float WeakStateHitDamageModifier { get; set; } = 0.8f;
-
 		// Token: 0x17000098 RID: 152
 		// (get) Token: 0x06000101 RID: 257 RVA: 0x00002FF7 File Offset: 0x000011F7
 		// (set) Token: 0x06000102 RID: 258 RVA: 0x00002FFF File Offset: 0x000011FF
-		[SettingPropertyFloatingInteger("{=ah_tired_state_hit_damage_modifier}Tired State Hit Damage Penalty", 0.1f, 1.7f, "0.0", RequireRestart = false, HintText = "{=ah_tired_state_hit_damage_modifier_hint}Tired state hit damage penalty, default 0.7, means 30% reduction", Order = 2)]
+		[SettingPropertyFloatingInteger("Minimum Damage Multiplier", 0.1f, 1.0f, "0.0", RequireRestart = false, HintText = "Minimum damage multiplier when AH is low. Default: 0.1", Order = 2)]
 		[SettingPropertyGroup("{=ah_damage_penalty}Damage Penalty(Only melee)", GroupOrder = 5)]
-		public float TiredStateHitDamageModifier { get; set; } = 0.7f;
+		public float MinDamageMultiplier { get; set; } = 0.1f;
 
 		// Token: 0x17000099 RID: 153
 		// (get) Token: 0x06000103 RID: 259 RVA: 0x00003008 File Offset: 0x00001208
 		// (set) Token: 0x06000104 RID: 260 RVA: 0x00003010 File Offset: 0x00001210
-		[SettingPropertyFloatingInteger("{=ah_powerless_state_hit_damage_modifier}Powerless State Hit Damage Penalty", 0.1f, 1.6f, "0.0", RequireRestart = false, HintText = "{=ah_powerless_state_hit_damage_modifier_hint}Powerless state hit damage penalty, default 0.5, means 50% reduction", Order = 3)]
+		[SettingPropertyFloatingInteger("Damage Reduction AH Threshold", 0.0f, 1.0f, "0.0", RequireRestart = false, HintText = "Stamina threshold for applying damage reduction. Default: 0.8", Order = 3)]
 		[SettingPropertyGroup("{=ah_damage_penalty}Damage Penalty(Only melee)", GroupOrder = 5)]
-		public float PowerlessStateHitDamageModifier { get; set; } = 0.5f;
+		public float DamageReductionThreshold { get; set; } = 0.8f;
 
 		// Token: 0x1700009A RID: 154
 		// (get) Token: 0x06000105 RID: 261 RVA: 0x00003019 File Offset: 0x00001219
@@ -970,10 +956,8 @@ namespace AhFight.Settings
 			this.WeakStateDropEnabled = true;
 			this.TiredStateDropEnabled = true;
 			this.PowerlessStateDropEnabled = true;
-			this.NormalStateHitDamageModifier = 1f;
-			this.WeakStateHitDamageModifier = 0.8f;
-			this.TiredStateHitDamageModifier = 0.7f;
-			this.PowerlessStateHitDamageModifier = 0.5f;
+			this.MinDamageMultiplier = 0.1f;
+			this.DamageReductionThreshold = 0.8f;
             this.StaminaDamageAmountOnBlock  = 0.65f;
             this.CrushThroughBlockThreshold  = 0.45f;
 			this.AttackSpeedPenaltyEnabled = true;

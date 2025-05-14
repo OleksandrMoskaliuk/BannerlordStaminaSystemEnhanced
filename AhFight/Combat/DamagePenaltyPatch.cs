@@ -5,27 +5,35 @@ using TaleWorlds.MountAndBlade;
 
 namespace AhFight.Combat
 {
-	// Token: 0x02000012 RID: 18
-	[HarmonyPatch(typeof(Mission))]
-	[HarmonyPatch("RegisterBlow")]
-	public static class DamagePenaltyPatch
-	{
-		// Token: 0x060001AA RID: 426
-		private static void Prefix(Agent attacker, Agent victim, GameEntity realHitEntity, ref Blow b, ref AttackCollisionData collisionData, in MissionWeapon attackerWeapon, ref CombatLogData combatLogData)
-		{
-			if (AhFightConfig.hitDamagePenaltyEnabled)
-			{
-				if (attacker == null || b.InflictedDamage <= 0 || b.IsMissile)
-				{
-					return;
-				}
-				float num = (float)b.InflictedDamage;
-				float num2 = (float)DamagePenaltyEffect.ApplyDamagePenalty(attacker, (int)num);
-				b.InflictedDamage = (int)num2;
-				collisionData.InflictedDamage = (int)num2;
-				combatLogData.InflictedDamage = (int)num2;
-				combatLogData.ModifiedDamage = (int)(num2 - num);
-			}
-		}
-	}
+    // This patch applies a stamina-based damage penalty before a blow is registered
+    [HarmonyPatch(typeof(Mission))]
+    [HarmonyPatch("RegisterBlow")]
+    public static class DamagePenaltyPatch
+    {
+        private static void Prefix(
+            Agent attacker,
+            Agent victim,
+            GameEntity realHitEntity,
+            ref Blow b,
+            ref AttackCollisionData collisionData,
+            in MissionWeapon attackerWeapon,
+            ref CombatLogData combatLogData)
+        {
+            // Only apply if the feature is enabled and the attacker is valid and this isn't a missile hit
+            if (!AhFightConfig.hitDamagePenaltyEnabled || attacker == null || b.InflictedDamage <= 0 || b.IsMissile)
+                return;
+
+            // Cache original damage as float
+            float originalDamage = b.InflictedDamage;
+
+            // Apply stamina-based penalty
+            float modifiedDamage = DamagePenaltyEffect.ApplyDamagePenalty(attacker, (int)originalDamage);
+
+            // Update damage values in all relevant structs
+            b.InflictedDamage = (int)modifiedDamage;
+            collisionData.InflictedDamage = (int)modifiedDamage;
+            combatLogData.InflictedDamage = (int)modifiedDamage;
+            combatLogData.ModifiedDamage = (int)(modifiedDamage - originalDamage);
+        }
+    }
 }

@@ -1411,40 +1411,12 @@ namespace AhFight
 			}
 		}
 
-		// Token: 0x17000061 RID: 97
-		// (get) Token: 0x06000061 RID: 97
-		public static float NormalStateHitDamageModifier
-		{
-			get
-			{
-				McmSetting instance = GlobalSettings<McmSetting>.Instance;
-				if (instance == null)
-				{
-					return 1f;
-				}
-				return instance.NormalStateHitDamageModifier;
-			}
-		}
-
-		// Token: 0x17000062 RID: 98
-		// (get) Token: 0x06000062 RID: 98
-		public static float WeakStateHitDamageModifier
-		{
-			get
-			{
-				McmSetting instance = GlobalSettings<McmSetting>.Instance;
-				if (instance == null)
-				{
-					return 0.8f;
-				}
-				return instance.WeakStateHitDamageModifier;
-			}
-		}
+		
 
 		// Token: 0x17000063 RID: 99
 		// (get) Token: 0x06000063 RID: 99
-		public static float TiredStateHitDamageModifier
-		{
+		public static float MinDamageMultiplier
+        {
 			get
 			{
 				McmSetting instance = GlobalSettings<McmSetting>.Instance;
@@ -1452,22 +1424,22 @@ namespace AhFight
 				{
 					return 0.7f;
 				}
-				return instance.TiredStateHitDamageModifier;
+				return instance.MinDamageMultiplier;
 			}
 		}
 
 		// Token: 0x17000064 RID: 100
 		// (get) Token: 0x06000064 RID: 100
-		public static float PowerlessStateHitDamageModifier
-		{
+		public static float DamageReductionThreshold
+        {
 			get
 			{
 				McmSetting instance = GlobalSettings<McmSetting>.Instance;
 				if (instance == null)
 				{
-					return 0.5f;
+					return 0.1f;
 				}
-				return instance.PowerlessStateHitDamageModifier;
+				return instance.DamageReductionThreshold;
 			}
 		}
 
